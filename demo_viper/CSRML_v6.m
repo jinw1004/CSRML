@@ -1,6 +1,4 @@
-% 速度已经提上来了，比预想的还要好，直接提了50多倍，在v4中，我们加入margin和regularization，当然首先要把input
-% dim调大看看有没有性能上的提升
-% v4里的参数是一组非常好的参数，如果后续没有什么提升的话可以直接使用这组参数来计算最终结果。
+% Demo of CSRML on VIPeR dataset
 clear; clc;
 demoDir = pwd;
 
@@ -64,14 +62,13 @@ for trial = 1:10
 
     % training
     info.train.loss = [];
-    info.train.rank1 = []; % 这个以cmc rank-1作为error的指标么？
+    info.train.rank1 = []; 
     info.val.loss = [];
     info.val.rank1 = [];
 
     % training options
     batchsize = 30;
     lr_g = [2e-4*ones(1, 300), 5e-5*ones(1, 50), 1e-5*ones(1, 50)];
-    % lambda = 0.1;
     lambda = 0;
     beta = 6;
     tao = 1;
@@ -84,7 +81,7 @@ for trial = 1:10
         info.train.rank1(end+1) = 0;
         info.val.loss(end+1) = 0;
         info.val.rank1(end+1) = 0;
-    %     sum_grad = sum_grad_template; %相当于清零操作
+
         disp('====================================');
 
         id_trn = randperm(numel(trnSp));
